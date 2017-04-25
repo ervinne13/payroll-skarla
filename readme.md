@@ -1,12 +1,11 @@
-<h3 align="center">Inventory</h3>
+<h3 align="center">Payroll</h3>
 
-## About Inventory
+## About Payroll
 
 [No application name yet]
-Contains basic Inventory Management.
-- In and Out(expend) inventoriable items to simulate purchasing and sales
-- Manufacturing with Bill of Materials
-- Production using BOM and generation of products
+Contains basic Payroll Management.
+
+TODO: Add description here
 
 ## About the Author
 

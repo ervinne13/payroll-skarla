@@ -68,6 +68,9 @@ Route::group(['prefix' => 'HRIS', 'namespace' => 'Modules\HRIS', 'middleware' =>
 
     Route::get('policies/datatable', 'PoliciesController@datatable');
     Route::resource('policies', 'PoliciesController');
+
+    Route::get('holidays/datatable', 'HolidaysController@datatable');
+    Route::resource('holidays', 'HolidaysController');
 });
 
 //  Timekeeping

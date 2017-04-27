@@ -45,23 +45,27 @@ class DatabaseSeeder extends Seeder {
                 "bank",
                 //
                 "hris.work_schedule_shift",
+                "hris.employee_shift_adjustment",
                 "hris.employee_work_schedule",
                 "hris.work_schedule",
                 "hris.shift",
                 //  payroll               
                 "payroll.chrono_log",
+                "payroll.chrono_log_for_correction",
                 "payroll.payroll_payment_method",
                 "payroll.employee_payroll_summary",
+                "payroll.employee_overtime_summary",
                 "payroll.payroll_entry",
                 "payroll.payroll_type",
                 "payroll.payroll_item",
-                "payroll.overtime_summary",
                 "payroll.payroll",
                 //
                 "hris.employee",
                 //
                 "user_location",
                 "location",
+                "city",
+                "region",
                 "cost_profit_center",
                 "company",
             ];
@@ -87,6 +91,8 @@ class DatabaseSeeder extends Seeder {
             $this->call(PositionsSeeder::class);
 
             $this->call(EmployeeSeeder::class);
+
+            $this->call(HolidaySeeder::class);
 
             DB::commit();
         } catch (Exception $e) {

@@ -11,7 +11,7 @@ use App\StandardizationHelpers\BasicEnum;
  */
 abstract class HolidayType extends BasicEnum {
 
-    const REGGULAR = "REG";
-    const SPECIAL  = "SPC";
+    const REGULAR = "REG";
+    const SPECIAL = "SPC";
 
 }

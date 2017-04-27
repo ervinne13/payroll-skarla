@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\MasterFiles\City;
 use App\Models\MasterFiles\CostProfitCenter;
 use App\Models\MasterFiles\Location;
+use App\Models\MasterFiles\Region;
 use Illuminate\Database\Seeder;
 
 class LocationsSeeder extends Seeder {
@@ -12,6 +14,20 @@ class LocationsSeeder extends Seeder {
      * @return void
      */
     public function run() {
+
+        $regions = [
+            ["code" => "NCR", "display_name" => "National Capital Region"],
+            ["code" => "RGN4", "display_name" => "Region 4"],
+        ];
+
+        Region::insert($regions);
+
+        $cities = [
+            ["code" => "MNL", "region_code" => "NCR", "display_name" => "Manila"],
+            ["code" => "STRS_LGN", "region_code" => "RGN4", "display_name" => "Sta. Rosa Laguna"],
+        ];
+
+        City::insert($cities);
 
         $CPCs = [
             ["code" => "AERO_MAIN_CPC", "display_name" => "AEROPACK INDUSTRIES, INC. Main", "company_code" => "AERO"],
@@ -27,17 +43,17 @@ class LocationsSeeder extends Seeder {
         CostProfitCenter::insert($CPCs);
 
         $locations = [
-            ["code" => "AERO_HO", "company_code" => "AERO", "cost_profit_center_code" => "AERO_MAIN_CPC", "display_name" => "AERO Head Office"],
-            ["code" => "AERO_B1", "company_code" => "AERO", "cost_profit_center_code" => "AERO_MAIN_CPC", "display_name" => "AERO Test Branch 1"],
-            ["code" => "AERO_B2", "company_code" => "AERO", "cost_profit_center_code" => "AERO_MAIN_CPC", "display_name" => "AERO Test Branch 2"],
-            ["code" => "AERO_RB1", "company_code" => "AERO", "cost_profit_center_code" => "AERO_REM_CPC_1", "display_name" => "AERO Remote Provice Branch 1"],
-            ["code" => "AERO_RB2", "company_code" => "AERO", "cost_profit_center_code" => "AERO_REM_CPC_1", "display_name" => "AERO Remote Provice Branch 2"],
-            ["code" => "CHI_B1", "company_code" => "AERO", "cost_profit_center_code" => "CHI_CPC", "display_name" => "CHI Test Branch 1"],
-            ["code" => "CTI_B1", "company_code" => "AERO", "cost_profit_center_code" => "CTI_CPC", "display_name" => "CTI Test Branch 1"],
-            ["code" => "CCPI_B1", "company_code" => "AERO", "cost_profit_center_code" => "CCPI_CPC", "display_name" => "CCPI Test Branch 1"],
-            ["code" => "D&L_B1", "company_code" => "AERO", "cost_profit_center_code" => "D&L_CPC", "display_name" => "D&L Test Branch 1"],
-            ["code" => "DLPCI_B1", "company_code" => "AERO", "cost_profit_center_code" => "DLPCI_CPC", "display_name" => "DLPCI Test Branch 1"],
-            ["code" => "FICM_B1", "company_code" => "AERO", "cost_profit_center_code" => "FICM_CPC", "display_name" => "FICM Test Branch 1"],
+            ["code" => "AERO_HO", "company_code" => "AERO", "city_code" => "MNL", "cost_profit_center_code" => "AERO_MAIN_CPC", "display_name" => "AERO Head Office"],
+            ["code" => "AERO_B1", "company_code" => "AERO", "city_code" => "MNL", "cost_profit_center_code" => "AERO_MAIN_CPC", "display_name" => "AERO Test Branch 1"],
+            ["code" => "AERO_B2", "company_code" => "AERO", "city_code" => "MNL", "cost_profit_center_code" => "AERO_MAIN_CPC", "display_name" => "AERO Test Branch 2"],
+            ["code" => "AERO_RB1", "company_code" => "AERO", "city_code" => "STRS_LGN", "cost_profit_center_code" => "AERO_REM_CPC_1", "display_name" => "AERO Remote Provice Branch 1"],
+            ["code" => "AERO_RB2", "company_code" => "AERO", "city_code" => "STRS_LGN", "cost_profit_center_code" => "AERO_REM_CPC_1", "display_name" => "AERO Remote Provice Branch 2"],
+            ["code" => "CHI_B1", "company_code" => "CHI", "city_code" => "MNL", "cost_profit_center_code" => "CHI_CPC", "display_name" => "CHI Test Branch 1"],
+            ["code" => "CTI_B1", "company_code" => "CTI", "city_code" => "MNL", "cost_profit_center_code" => "CTI_CPC", "display_name" => "CTI Test Branch 1"],
+            ["code" => "CCPI_B1", "company_code" => "CCPI", "city_code" => "STRS_LGN", "cost_profit_center_code" => "CCPI_CPC", "display_name" => "CCPI Test Branch 1"],
+            ["code" => "D&L_B1", "company_code" => "D&L", "city_code" => "STRS_LGN", "cost_profit_center_code" => "D&L_CPC", "display_name" => "D&L Test Branch 1"],
+            ["code" => "DLPCI_B1", "company_code" => "DLPCI", "city_code" => "STRS_LGN", "cost_profit_center_code" => "DLPCI_CPC", "display_name" => "DLPCI Test Branch 1"],
+            ["code" => "FICM_B1", "company_code" => "FICM", "city_code" => "STRS_LGN", "cost_profit_center_code" => "FICM_CPC", "display_name" => "FICM Test Branch 1"],
         ];
 
         Location::insert($locations);

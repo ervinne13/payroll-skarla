@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Payroll\TaxCategory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder {
@@ -12,6 +12,22 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        Eloquent::unguard();
+
+        if (App::environment() === 'development' || App::environment() === 'local') {
+//            echo "\nSeeding Development Seeders\n";
+//            echo "\n=================================\n\n";
+            $this->developmentSeeder();
+        } else if (App::environment() === 'testing') {
+//            echo "\nSeeding Test Seeders\n";
+//            echo "\n=================================\n\n";
+            $this->testingSeeder();
+        } else {
+            echo "Unsupported environment: " . App::environment();
+        }
+    }
+
+    public function developmentSeeder() {
         try {
 
             DB::beginTransaction();
@@ -94,6 +110,25 @@ class DatabaseSeeder extends Seeder {
 
             $this->call(HolidaySeeder::class);
 
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function testingSeeder() {
+        try {
+            DB::beginTransaction();
+
+            $tables = [
+                "payroll.chrono_log"
+            ];
+
+            DB::statement('TRUNCATE TABLE ' . implode(',', $tables) . ';');
+
+            //  Under test
+            $this->call(TestAllPresentExceptHolidayChronologSeeder::class);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

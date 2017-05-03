@@ -4,7 +4,6 @@ namespace App\Models\HRIS;
 
 use App\Models\DateFilterable;
 use App\Models\SGModel;
-use DateTime;
 
 class Holiday extends SGModel {
 
@@ -30,6 +29,10 @@ class Holiday extends SGModel {
                             $query->where('last_date_applicable', '<=', $to);
                         })
         ;
+    }
+
+    public function scopeAppliesToAllLocation($query) {
+        return $query->where('applies_to_all_location', TRUE);
     }
 
     public function scopeLocationCode($query, $locationCode) {

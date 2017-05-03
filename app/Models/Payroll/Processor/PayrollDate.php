@@ -37,8 +37,8 @@ class PayrollDate {
         if ($shift->scheduled_in !== $shift->scheduled_out) {
             $payrollDate->requiredTimeIn  = $shift->scheduled_in;
             $payrollDate->requiredTimeOut = $shift->scheduled_out;
-            $payrollDate->breaktTimeOut1  = NULL; //TODO
-            $payrollDate->breaktTimeIn1   = NULL; //TODO
+            $payrollDate->breaktTimeOut1  = NULL; //TODO: support break time out
+            $payrollDate->breaktTimeIn1   = NULL; //TODO: support break time out
         }
 
         if ($holiday) {

@@ -7,6 +7,7 @@ use App\Models\MasterFiles\Location;
 use App\Models\Payroll\TaxCategory;
 use App\Models\Searchable;
 use App\Models\SGModel;
+use App\Models\Timekeeping\Chronolog;
 
 class Employee extends SGModel {
 
@@ -59,6 +60,10 @@ class Employee extends SGModel {
     /*     * ************************************************************************* */
     // <editor-fold defaultstate="collapsed" desc="Scopes">
 
+    public function scopeEmployeeNumber($query, $employeeNumber) {
+        return $query->where("code", $employeeNumber);
+    }
+
     public function scopeAlphabeticalFirstName($query) {
         return $query->orderBy("first_name");
     }
@@ -78,6 +83,10 @@ class Employee extends SGModel {
 
     public function company() {
         return $this->belongsTo(Company::class, "company_code");
+    }
+
+    public function chronoLog() {
+        return $this->hasMany(Chronolog::class, "employee_code");
     }
 
     public function position() {

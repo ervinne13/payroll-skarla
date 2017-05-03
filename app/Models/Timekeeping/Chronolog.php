@@ -22,4 +22,8 @@ class Chronolog extends SGModel {
         return $query->where("employee_code", $employeeCode);
     }
 
+    public function scopeEntryDate($query, $entryDate) {
+        return $query->where("entry_date", $entryDate);
+    }
+
 }

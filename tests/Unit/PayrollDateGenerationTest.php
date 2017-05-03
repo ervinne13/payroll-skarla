@@ -1,16 +1,19 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Models\HRIS\Holiday;
 use App\Models\HRIS\WorkSchedule;
 use App\Payroll\Enum\HolidayType;
 use App\Payroll\Services\Payroll\StatefulPayrollDatesGenerator;
 use DateTime;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
-class PayrollDateGenerationTest extends TestCase {
+class PayrollDateGenerationTest extends DatabaseTestCase {
 
+    /**
+     * @group Payroll
+     */
     public function testHolidays() {
 
         $testDateFrom = "2017-04-26";
@@ -30,7 +33,7 @@ class PayrollDateGenerationTest extends TestCase {
         $holidays = Holiday::ApplicableOnRange($testDateFrom, $testDateTo)->get();
 
         foreach ($mondayToFridayWSCodes AS $code) {
-            /* @var $generator App\Payroll\Services\Payroll\StatefulPayrollDatesGenerator */
+            /* @var $generator StatefulPayrollDatesGenerator */
             $generator    = $this->getPayrollDatesGenerator($code, $testDateFrom, $testDateTo);
             $payrollDates = $generator->getWithAppliedHolidays($holidays);
 
@@ -56,6 +59,9 @@ class PayrollDateGenerationTest extends TestCase {
         $this->assertTrue(true);
     }
 
+    /**
+     * @group Payroll
+     */
     public function testHolidayWithNonApplicableHolidayByLocation() {
 
         $testDateFrom = "2017-04-26";
@@ -72,11 +78,11 @@ class PayrollDateGenerationTest extends TestCase {
         $regularHolidays = ["2017-05-01"];
         $specialHoliday  = ["2017-04-28"]; //should not be applicable
         //  should fall under region 4
-        $holidays = Holiday::ApplicableOnRange($testDateFrom, $testDateTo)->LocationCode("AERO_RB1")->get();
+        $holidays        = Holiday::ApplicableOnRange($testDateFrom, $testDateTo)->LocationCode("AERO_RB1")->get();
 
         foreach ($mondayToFridayWSCodes AS $code) {
 
-            /* @var $generator App\Payroll\Services\Payroll\StatefulPayrollDatesGenerator */
+            /* @var $generator StatefulPayrollDatesGenerator */
             $generator    = $this->getPayrollDatesGenerator($code, $testDateFrom, $testDateTo);
             $payrollDates = $generator->getWithAppliedHolidays($holidays);
 
@@ -100,6 +106,9 @@ class PayrollDateGenerationTest extends TestCase {
         $this->assertTrue(true);
     }
 
+    /**
+     * @group Payroll
+     */
     public function testHolidayWithExtraApplicableHolidayByLocation() {
 
         $testDateFrom = "2017-04-26";
@@ -120,7 +129,7 @@ class PayrollDateGenerationTest extends TestCase {
 
         foreach ($mondayToFridayWSCodes AS $code) {
             //  manila area, should fall under NCR
-            /* @var $generator App\Payroll\Services\Payroll\StatefulPayrollDatesGenerator */
+            /* @var $generator StatefulPayrollDatesGenerator */
             $generator    = $this->getPayrollDatesGenerator($code, $testDateFrom, $testDateTo);
             $payrollDates = $generator->getWithAppliedHolidays($holidays);
 
@@ -146,6 +155,9 @@ class PayrollDateGenerationTest extends TestCase {
         $this->assertTrue(true);
     }
 
+    /**
+     * @group Payroll
+     */
     public function testMorningShift() {
 
         $testDateFrom = "2017-04-26";
@@ -176,6 +188,9 @@ class PayrollDateGenerationTest extends TestCase {
         $this->assertTrue(true);
     }
 
+    /**
+     * @group Payroll
+     */
     public function testMidShift() {
 
         $testDateFrom = "2017-04-26";
@@ -206,6 +221,9 @@ class PayrollDateGenerationTest extends TestCase {
         $this->assertTrue(true);
     }
 
+    /**
+     * @group Payroll
+     */
     public function testNightShift() {
 
         $testDateFrom = "2017-04-26";

@@ -17,7 +17,7 @@ use Carbon\Carbon;
 trait HasDocDate {
 
     public function setDocDateAttribute($value) {
-        $this->attributes['doc_date'] = Carbon::createFromFormat('m/d/Y H:i a', $value);
+        $this->attributes['document_date'] = Carbon::createFromFormat('m/d/Y H:i a', $value);
     }
 
 }

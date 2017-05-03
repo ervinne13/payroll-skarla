@@ -52,7 +52,6 @@ class StatefulPayrollDatesGenerator {
         $interval = DateInterval::createFromDateString('1 day');
         $period   = new DatePeriod($this->periodFrom, $interval, $this->periodTo);
 
-        //  TODO: make a map of holidays as well
         $mappedShifts = $this->getMappedShifts();
 
         //  1 = Sunday, up to 7 = Saturday
@@ -84,7 +83,7 @@ class StatefulPayrollDatesGenerator {
     }
 
     /**
-     * 
+     * Returns the payroll dates but after applying a set of holiday objects
      * @param Array $holidays An array of App\Models\HRIS\Holiday objects
      */
     public function getWithAppliedHolidays($holidays) {
@@ -102,18 +101,6 @@ class StatefulPayrollDatesGenerator {
         }
 
         return $payrollDates;
-    }
-
-    /**
-     * 
-     * @param Array $payrollDates An array of App\Models\Payroll\Processor\EmployeePayrollDate objects
-     */
-    public function applyOverwrites($payrollDates) {
-        
-    }
-
-    public function applyLeaves() {
-        
     }
 
     public function getGeneratedPayrollDates() {

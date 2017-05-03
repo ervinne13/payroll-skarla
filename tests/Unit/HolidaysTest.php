@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Models\HRIS\Holiday;
 use DateTime;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
-class HolidaysTest extends TestCase {
+class HolidaysTest extends DatabaseTestCase {
 
     /**
      * A basic test example.
